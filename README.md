@@ -35,6 +35,10 @@ String token = JWT.create()
 
 ---
 
+## ⚠️ Known Issues
+
+- **Kotlin files** — variable detection is limited in `.kt` files. The plugin was built for Java and may not work as expected in Kotlin projects.
+
 ## ⌨️ Shortcut
 
 | Action | Shortcut         |
