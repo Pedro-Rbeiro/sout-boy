@@ -2,7 +2,7 @@
 
 > One keystroke. One log. No more typing `System.out.println` by hand.
 
-SoutBoy is an IntelliJ IDEA plugin inspired by the legendary **Pip-Boy** from Fallout. Place your cursor on any variable, press `Ctrl+Alt+L`, and it generates a formatted debug log — dropped right after the current statement, no matter how many lines it spans.
+SoutBoy is an IntelliJ IDEA plugin inspired by the legendary **Pip-Boy** from Fallout. Place your cursor on any variable, press `Ctrl+Alt+;`, and it generates a formatted debug log — dropped right after the current statement, no matter how many lines it spans.
 
 ---
 
