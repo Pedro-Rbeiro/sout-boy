@@ -1,0 +1,57 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>org.example.sout-boy</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Sout Boy</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://github.com/Pedro-Rbeiro">Pedro Ribeiro</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+        <h2>☢️ SoutBoy</h2>
+        <p>Tired of typing <code>System.out.println</code> by hand every time you need to debug something? <strong>SoutBoy</strong> does it for you in one keystroke.</p>
+
+        <p>Place your cursor on any variable (or select an expression), press <b>Ctrl+Alt+;</b>, and SoutBoy instantly generates a formatted log with the class name, line number, and variable value — dropped right after the current statement, no matter how many lines it spans.</p>
+
+        <h3>Generated output</h3>
+        <pre>System.out.println("☢️ 42 ~ AuthService ~ token: " + token);</pre>
+
+        <h3>Features</h3>
+        <ul>
+          <li>Works with variables, expressions, and method calls</li>
+          <li>Detects the current class name and line number automatically</li>
+          <li>Smartly inserts <em>after</em> the full statement — even multiline chains like <code>.sign(algorithm);</code></li>
+          <li>Inserts <em>inside</em> blocks like <code>if</code>, <code>for</code>, and <code>while</code></li>
+          <li>Preserves indentation</li>
+          <li>Falls back gracefully when no variable is found</li>
+        </ul>
+
+        <p>Inspired by the legendary <b>Pip-Boy</b>. Built for developers who just want to see what's going on.</p>
+]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <actions>
+        <action id="RocketLogAction"
+                class="org.example.soutboy.SoutBoyAction"
+                text="Rocket Log"
+                description="Gera System.out.println com emoji para variável selecionada"
+                icon="/icons/soutboy.svg"
+        >
+        <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt SEMICOLON" replace-all="true"/>
+        </action>
+    </actions>
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+</idea-plugin>
