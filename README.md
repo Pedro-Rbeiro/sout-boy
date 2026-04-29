@@ -37,9 +37,9 @@ String token = JWT.create()
 
 ## ⌨️ Shortcut
 
-| Action | Shortcut |
-|--------|----------|
-| Generate log | `Ctrl + Alt + L` |
+| Action | Shortcut         |
+|--------|------------------|
+| Generate log | `Ctrl + Alt + ;` |
 
 > ⚠️ This shortcut overrides **Reformat Code** by default. You can remap either one in **Settings → Keymap**.
 
