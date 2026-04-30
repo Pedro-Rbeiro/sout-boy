@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>org.example.sout-boy</id>
+    <id>com.github.pedrorbeiro.soutboy</id>
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
@@ -13,10 +13,16 @@
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
+        SoutBoy is an IntelliJ IDEA plugin for Java developers who are tired of typing System.out.println by hand every single time they need to debug something.
         <h2>☢️ SoutBoy</h2>
         <p>Tired of typing <code>System.out.println</code> by hand every time you need to debug something? <strong>SoutBoy</strong> does it for you in one keystroke.</p>
 
         <p>Place your cursor on any variable (or select an expression), press <b>Ctrl+Alt+;</b>, and SoutBoy instantly generates a formatted log with the class name, line number, and variable value — dropped right after the current statement, no matter how many lines it spans.</p>
+
+        <h3>Roadmap</h3>
+        <ul>
+            <li>Kotlin support</li>
+        </ul>
 
         <h3>Generated output</h3>
         <pre>System.out.println("☢️ 42 ~ AuthService ~ token: " + token);</pre>
@@ -46,7 +52,7 @@
                 description="Gera System.out.println com emoji para variável selecionada"
                 icon="/icons/soutboy.svg"
         >
-        <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt SEMICOLON" replace-all="true"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt SEMICOLON" replace-all="true"/>
         </action>
     </actions>
     <!-- Extension points defined by the plugin.
