@@ -47,7 +47,7 @@
 
     <actions>
         <action id="RocketLogAction"
-                class="org.example.soutboy.SoutBoyAction"
+                class="org.example.soutboy.action.SoutBoyAction"
                 text="Rocket Log"
                 description="Gera System.out.println com emoji para variável selecionada"
                 icon="/icons/soutboy.svg"

@@ -1,4 +1,4 @@
-package org.example.soutboy
+package org.example.soutboy.action
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -6,8 +6,28 @@ import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.util.TextRange
-import com.intellij.psi.*
+import com.intellij.psi.PsiBlockStatement
+import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiClassObjectAccessExpression
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiForStatement
+import com.intellij.psi.PsiForeachStatement
+import com.intellij.psi.PsiIdentifier
+import com.intellij.psi.PsiIfStatement
+import com.intellij.psi.PsiJavaCodeReferenceElement
+import com.intellij.psi.PsiLocalVariable
+import com.intellij.psi.PsiMethod
+import com.intellij.psi.PsiMethodCallExpression
+import com.intellij.psi.PsiParameter
+import com.intellij.psi.PsiReferenceExpression
+import com.intellij.psi.PsiReturnStatement
+import com.intellij.psi.PsiStatement
+import com.intellij.psi.PsiTypeElement
+import com.intellij.psi.PsiWhileStatement
 import com.intellij.psi.util.PsiTreeUtil
+import org.example.soutboy.generator.LogStatementGenerator
+import org.example.soutboy.model.LogContext
 
 class SoutBoyAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
@@ -99,10 +119,14 @@ class SoutBoyAction : AnAction() {
                     else -> statementInner.textRange.endOffset
                 }
             } else {
-                val text = document.text
-                val semicolonOffset = text.indexOf(';', offset).takeIf { it >= 0 }
-                    ?: document.getLineEndOffset(document.getLineNumber(offset))
-                semicolonOffset + 1
+                val fallbackStatement = PsiTreeUtil.getParentOfType(nearestElement, PsiStatement::class.java)
+                    ?: PsiTreeUtil.getParentOfType(psiFile.findElementAt(offset - 1), PsiStatement::class.java)
+
+                if (fallbackStatement != null) {
+                    fallbackStatement.textRange.endOffset
+                } else {
+                    document.getLineEndOffset(document.getLineNumber(offset))
+                }
             }
 
             val caretLine = document.getLineNumber(offset)
@@ -111,9 +135,14 @@ class SoutBoyAction : AnAction() {
             val lineText = document.getText(TextRange(lineStartOffsetInner, lineEndOffset))
             val indent = lineText.takeWhile { it == ' ' || it == '\t' }
             println(variableNames)
-            val logBlock = variableNames.joinToString("\n$indent") { name ->
-                """System.out.println("☢️ $lineNumber ~ $className ~ $name: " + $name);"""
-            }
+            val logContext = LogContext(
+                psiFile,
+                variableNames,
+                indent,
+                className,
+                lineNumber
+            )
+            val logBlock = LogStatementGenerator.generateLogStatement(logContext)
 
             document.insertString(insertOffset, "\n$indent$logBlock")
             editor.caretModel.moveToOffset(insertOffset + 1 + indent.length + logBlock.length)
