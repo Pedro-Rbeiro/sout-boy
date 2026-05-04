@@ -1,3 +1,5 @@
+<img width="1962" height="802" alt="6b85b6c2-2b95-4a62-93e9-432d06c27153" src="https://github.com/user-attachments/assets/ed98fb6c-f656-4131-b4d1-b8eb4d20e266" />
+
 # ☢️ SoutBoy
 
 > One keystroke. One log. No more typing `System.out.println` by hand.
